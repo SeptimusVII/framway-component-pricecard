@@ -1,1 +1,63 @@
-.pricecard{}
+.pricecard{padding: 0; overflow: hidden; display: flex; flex-direction: column; border-radius: $radius;
+  &.limit{max-width: 600px;}
+  .item-grid>&{height: 100%; max-width: 600px; margin-left: auto; margin-right: auto;}
+  @each $key, $value in $colors{
+    &.color--#{$key}{
+      &.bordered{border: 4px solid lighten($value,30);}
+      &.bordered--hover{ outline: 4px solid transparent; transition: outline-color 0.4s; outline-offset: -4px;
+        &:hover{outline-color: lighten($value,30);}
+      }
+      &.title--bg{
+        .pricecard__title{background: lighten($value,30); padding: 1.15em 2rem; color: contrastFW(body(font-color),lighten($value,30));border: 4px solid lighten($value,30); border-bottom: 0;
+          margin: -4px -4px 0;
+        }
+      }
+      .pricecard__cta,
+      .pricecard__frequency{color:$value;}
+      .pricecard__cta a {
+        i[class*=fa],svg{background: $value;}
+      }
+    }
+  }
+  &.drop-shadow{ filter: drop-shadow(1px 1px 15px rgba(0,0,0,0.15)); box-shadow: none;}
+}
+.pricecard__wrapper{padding: 2em 2.5em; gap: 2em; display: flex;flex-direction: column; flex-grow: 1;}
+.pricecard__title{padding: 1em 2rem 0.5em; text-align: center; font-size: 1.35em;
+  span{display: inline-block;}
+}
+.pricecard__content{ flex-grow: 1; display: grid;}
+.pricecard__text{margin-top: auto; margin-bottom: auto; height: fit-content; line-height: 1.6;}
+.pricecard__lines{
+  &:not([class*=w-fit]){width: 100%;}
+  .pricecard__text+&{ margin-top: 1em;}
+  &:is(ul){list-style: none; padding-left: 0; margin-bottom: 0;}
+}
+.pricecard__line{ font-weight: 400; display: flex; align-items: center; gap: 2em;
+  .line__text{flex-grow: 1; font-size: 0.85em;}
+  .line__icon{font-size: 1.2em; width: 1.5em; text-align: center; display: flex; justify-content: center;flex-shrink: 0;}
+  +.pricecard__line{margin-top: 0.35em; padding-top: 0.35em; border-top: 1px solid rgba(color(greylighter),0.8);}
+}
+.pricecard__footer{ display: flex;justify-content: center; align-items: flex-end;gap: 1.5em; flex-wrap: wrap;
+  >*{flex: 1 1 auto;}
+}
+.pricecard__price__wrapper{display: grid;}
+.pricecard__price{font-size: 2em; white-space: nowrap;}
+.pricecard__frequency{font-size: 0.75em; font-style: italic;}
+.pricecard__cta{flex-grow: 0; opacity: 0.8; transition: opacity 0.4s; margin-left: auto;
+  &:hover{opacity: 1;}
+  a{display: flex;align-items: center;gap: 0.5em;font-size: 1.2em; text-decoration: none; color: inherit;
+    &:hover{color: inherit;}
+    i[class*=fa],svg{
+      font-size: 1.25em;
+      width: 1em;
+      height: 1em;
+      padding: 0.45em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $primary;
+      color: body(block-background);
+      border-radius: 100%;
+    }
+  }
+}
