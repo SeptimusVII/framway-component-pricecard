@@ -58,6 +58,7 @@
       background: $primary;
       color: body(block-background);
       border-radius: 100%;
+      box-sizing: content-box;
     }
   }
 }
